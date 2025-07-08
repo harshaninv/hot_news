@@ -44,6 +44,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# hide .env file
-.env
-
+# ignore the secrets file
+lib/secrets.dart
