@@ -33,15 +33,25 @@ class NewsdetailScreen extends StatelessWidget {
           children: [
             // image
             ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(8),
+              borderRadius: BorderRadius.circular(8),
               child: articledetail.urlToImage != null
                   ? Hero(
-                      tag: articledetail.publishedAt,
+                      tag:
+                          "${articledetail.publishedAt}_${articledetail.url}", // Unique tag
                       child: FadeInImage(
-                        placeholder: MemoryImage(kTransparentImage),
+                        placeholder: const NetworkImage(
+                          'https://nbhc.ca/sites/default/files/styles/article/public/default_images/news-default-image%402x_0.png?itok=B4jML1jF',
+                        ), // Local placeholder
                         image: NetworkImage(articledetail.urlToImage!),
                         fit: BoxFit.cover,
                         width: double.infinity,
+                        imageErrorBuilder: (context, error, stackTrace) {
+                          return Image.network(
+                            'https://nbhc.ca/sites/default/files/styles/article/public/default_images/news-default-image%402x_0.png?itok=B4jML1jF', // Fallback image for errors
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          );
+                        },
                       ),
                     )
                   : const SizedBox.shrink(),
@@ -79,9 +89,9 @@ class NewsdetailScreen extends StatelessWidget {
             // article content detail
             Text(
               articledetail.content ?? 'no content here',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontSize: 18,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
 
             // see more text that have the url

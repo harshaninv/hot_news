@@ -37,10 +37,11 @@ class _SearchBoxState extends State<SearchBox> {
     final newsController = Provider.of<NewsController>(context, listen: false);
 
     return TextField(
+      readOnly: newsController.status == NewsStatus.loading,
       controller: _searchController,
       decoration: InputDecoration(
         hintText: 'Search for news...',
-        prefixIcon: Icon(Icons.search),
+        prefixIcon: Icon(newsController.status == NewsStatus.loading ? Icons.search_off_rounded : Icons.search) ,
         suffixIcon: _searchController.text.isNotEmpty
             ? IconButton(
                 icon: Icon(Icons.clear),
@@ -61,6 +62,7 @@ class _SearchBoxState extends State<SearchBox> {
       ),
       onSubmitted: (query) {
         if (query.isNotEmpty) {
+          
           newsController.fetchNewsByQuery(query);
         } else {
           newsController.resetToDefaultView(); // Reset to default view if search is cleared

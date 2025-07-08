@@ -41,9 +41,9 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 10),
 
             // Using Wrap for filters to allow them to flow to the next line if space runs out
-            Center(
-              child: Wrap(
-                alignment: WrapAlignment.center,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 spacing: double.minPositive + 4,
                 children: [
                   // Example filter chips/buttons
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            // const SizedBox(height: 10),
 
             const Expanded(child: NewsList()),
           ],
