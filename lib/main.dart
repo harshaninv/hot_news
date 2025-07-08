@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hot_news/controllers/news_controller.dart';
 import 'package:hot_news/screens/onboarding.dart';
 import 'package:hot_news/services/api_client.dart';
@@ -8,7 +7,6 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
   runApp(
     ChangeNotifierProvider(
       create: (context) => NewsController(NewsService(ApiClient())),
