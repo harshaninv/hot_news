@@ -1,0 +1,2 @@
+# Ignore Gradle/HTML/CMake-related files
+*.html linguist-vendored
